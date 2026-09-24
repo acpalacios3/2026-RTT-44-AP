@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Task Management App</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="./styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="container mt-2  ">
+
+        <h1 class=" mb-4">Task Management App</h1>
+
+        <div class=" card p-4 mb-2">
+
+            <div class="d-flex align-items-center mb-1">
+                <label for="taskInput" class="form-label">Task:</label>
+                <input id="taskInput" type="text" class="form-control w-50" placeholder="Enter a task">
+
+            </div>
+
+            <div class="d-flex align-items-center mb-1">
+                <label for="categoryInput" class="form-label">Category:</label>
+                <input id="categoryInput" type="text" class="form-control w-50" placeholder="Enter a category">
+            </div>
+
+            <div class="d-flex align-items-center mb-1">
+                <label for="deadlineInput" class="form-label">Deadline:</label>
+                <input id="deadlineInput" type="date" class="form-control w-50" required>
+            </div>
+
+            <div class="d-flex align-items-center mb-1">
+                <label for="statusInput" class="form-label">Status:</label>
+                <select id="statusInput" class="form-select w-50">
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+
+        </div>
+        <button id="addTaskButton" class="btn btn-primary mt-2 px-2">
+            Add Task
+        </button>
+
+        <div class="mb-1">
+            <label for="filterStatus" class="form-label">
+                Filter by status:
+            </label>
+
+            <select id="filterStatus" class="form-select w-25">
+                <option value="all">All</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="Overdue">Overdue</option>
+            </select>
+        </div>
+
+
+        <div class="task-header">
+            <span>Task</span>
+            <span>Category</span>
+            <span>Deadline</span>
+            <span>Status</span>
+            <span>Change Status</span>
+        </div>
+
+        <ul id="taskList"></ul>
+
+        <button id="clearButton" class="btn btn-danger mt-3">
+            Clear Tasks
+        </button>
+
+    </div>
+
+</body>
+
+</html>
