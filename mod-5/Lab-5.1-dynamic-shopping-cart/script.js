@@ -5,6 +5,8 @@ const cart = document.getElementById('cart');
 const totalPriceSpan = document.getElementById('total-price');
 
 
+
+
 const countItems = document.getElementById('count-items');
 
 let totalPrice = 0;

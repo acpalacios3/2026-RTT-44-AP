@@ -12,6 +12,12 @@ let usernameErrorInput = document.getElementById('usernameError');
 let emailErrorInput = document.getElementById('emailError');
 let passwordErrorInput = document.getElementById('passwordError');
 let confirmPasswordErrorInput = document.getElementById('passwordError');
+let smallMsgInput = document.getElementById('smallMsg');
+
+// set the focus on the first field of the form
+window.addEventListener("DOMContentLoaded", () => {
+        usernameInput.focus();
+    });
 
 // let registrationkList = [];
 
@@ -53,17 +59,10 @@ function addRegistration() {
 
 // *************************************
 
-// submit registration 
-registrationFormInput.addEventListener("submit", function (event) {
-
-    event.preventDefault();
-    addRegistration();
-
-});
-
 // check field is required
 function validateInput(input, msgValidate) {
-
+   input.minlength = 8;     
+   const lengthvar = input.minlength;
 
     input.setCustomValidity("");
 
@@ -99,6 +98,35 @@ function validateInput(input, msgValidate) {
                 input.setCustomValidity("Username can only contain letters, numbers, and underscores.======>");
             }
             break;
+        case "email":
+
+            if ( input.validity.typeMismatch){
+                input.setCustomValidity(" Enter a valid email.======>");
+            }
+
+            break;
+
+        case "password":
+             
+             console.log("1. password ------->" + input.value.length);
+             if (!input.validity.tooShort){
+                console.log("1. tooShort ");
+                input.setCustomValidity(`The password must be at least ${lengthvar} characters.`);
+                input.focus();
+             
+            }
+             break;
+
+        case "confirmPassword":
+            
+            console.log("2. confirmPassword ------->" + input.value.length);
+             if (!input.validity.tooShort){
+                console.log("2. tooShort ");
+                input.setCustomValidity(`The password confirmation must be at least ${lengthvar} characters.`);
+                input.focus();
+            }
+             break;
+       
         default:
 
             break;
@@ -109,7 +137,6 @@ function validateInput(input, msgValidate) {
     input.reportValidity();
     return;
 }
-
 
 registrationFormInput.addEventListener('focusout', function (event) {
 
@@ -129,27 +156,75 @@ registrationFormInput.addEventListener('focusout', function (event) {
         validateInput(input, "minlength");
     }
 
+    // 3. Validate email type
+    if (input.id === "email"){
+       
+        validateInput(input,"email");
+    }
+    
 });
 
 usernameInput.addEventListener("input", function (event) {
   
     // element that triggered the event
-    const e = event.target;  
-  
-    if (input.value.trim() === "") {
-            input.setCustomValidity("This field is required.");
+    const u = event.target;  
+     console.log('u.value.length ----->' + u.value.length);
+
+    if (u.value.trim() === "" || u.value.length === 0) {
+            console.log('trim() ----->' + u.value.length);
+            
+            usernameErrorInput.textContent = "This field is required.===>";
         } else {
-            input.setCustomValidity("");
+           
+            usernameErrorInput.textContent = "";
         }
 
-    input.reportValidity();
+    u.reportValidity();
 
-    e.pattern = "^[a-zA-Z0-9_]+$";
-    validateInput(e,"pattern");
+    if (u.value.length > 0) {
+
+    u.pattern = "^[a-zA-Z0-9_]+$";
+    validateInput(u,"pattern");
+     
+    }
+ 
 });
 
+passwordInput.addEventListener("input", function (event) {
+    const p = event.target;
+    //validate minlength the password 
 
+    validateInput(p, "password");
 
+}
+)
 
+confirmPasswordInput.addEventListener("input", function (event) {
+    const p = event.target;
+    //validate minlength the password confirmation
+    validateInput(p, "confirmPassword");
 
+}
+)
 
+confirmPasswordInput.addEventListener("blur", function (event) {
+
+    const p = event.target;  
+
+    if (p.value !== passwordInput.value){
+          confirmPasswordErrorInput.textContent = "The passwords don't match";
+
+      }
+
+}
+)
+
+// ************************
+// submit registration 
+// ************************
+registrationFormInput.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+    addRegistration();
+
+});
