@@ -12,14 +12,15 @@ let usernameErrorInput = document.getElementById('usernameError');
 let emailErrorInput = document.getElementById('emailError');
 let passwordErrorInput = document.getElementById('passwordError');
 let confirmPasswordErrorInput = document.getElementById('confirmPasswordError');
-let smallMsgInput = document.getElementById('smallMsg');
 
+
+
+// Load saved username from localStorage
 const savedUsername = localStorage.getItem("username");
-
+console.log("Saved username:", savedUsername);
 if (savedUsername) {
     usernameInput.value = savedUsername;
 }
-
 
 // set the focus on the first field of the form
 window.addEventListener("DOMContentLoaded", () => {
@@ -30,7 +31,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 let registrationkList = JSON.parse(localStorage.getItem("registrationkList")) || [];
 
-// *************************************
 
 function addRegistration() {
 
@@ -54,8 +54,10 @@ function addRegistration() {
 
     // It saves registrations in the storage browser, takes the registrationkList and turns it into text
     localStorage.setItem("registrationkList", JSON.stringify(registrationkList));
+    localStorage.setItem("username", username);
 
-    usernameInput.value = "";
+
+    // usernameInput.value = "";
     emailInput.value = "";
     passwordInput.value = "";
     confirmPasswordInput.value = "";
@@ -64,178 +66,163 @@ function addRegistration() {
 
 }
 
-// *************************************
-
-// check field is required
-function validateInput(input, msgValidate) {
-   
-    input.setCustomValidity("");
-
-    switch (msgValidate) {
-
-        case "minlengthUser":
-
-            console.log("input:", input);
-            // recupera el input
-            // <input type="text" id="username" name="username" pattern="^[a-zA-Z0-9_]+$" 
-            // data-nlok-ref-guid="712d1613-968f-4e8e-b7fb-f2d88da7c36a" required=""></input>
-
-            console.log("value:", input.value);
-            console.log("length:", input.value.length);
-
-            if (input.value.length > 0 && input.value.length < 5) {
-                // set the message
-
-                input.setCustomValidity('Username must be at least 5 characters.===>');
-
-            }
-            break;
-
-        case "required":
-
-            if (input.validity.valueMissing) {
-                input.setCustomValidity("This field is required ======>.");
-            }
-            break;
-        case "pattern":
-
-            if (input.validity.patternMismatch) {
-                input.setCustomValidity("Username can only contain letters, numbers, and underscores.======>");
-            }
-            usernameErrorInput.textContent = input.validationMessage;
-            break;
-
-            
-        case "email":
-
-            if ( input.validity.typeMismatch){
-                input.setCustomValidity(" Please enter a valid email address.======>");
-            }
-
-            break;
-
-        case "password":
-        case "confirmPassword":
-            input.minLength = 8;     
-                        
-             console.log("1. password ------->" + input.value.length);
-             if (input.validity.tooShort){
-                console.log("1. tooShort ");
-                if(msgValidate === 'password'){
-                    input.setCustomValidity(`The password must be at least ${input.minLength} characters.`);
-                } else if (msgValidate === 'confirmPassword'){
-                    input.setCustomValidity(`The password confirmation must be at least ${input.minLength} characters.`);
-
-                }
-                
-                          
-            }
-             break;
-    
-        default:
-
-            break;
-
-    }
+function validateUsernameInput(u) {
   
-    input.reportValidity();
-    return;
+    // // element that triggered the event
+    // const u = event.target;  
+     console.log('u.value.length ----->' + u.value.length);
+
+     if (u.value.trim() === "") {
+
+        u.setCustomValidity( "This field is required.");
+        usernameErrorInput.textContent = u.validationMessage;
+
+    } else if (u.value.length < 5) {
+
+        u.setCustomValidity("Username must be at least 5 characters.");
+        usernameErrorInput.textContent = u.validationMessage;
+
+    } else {
+
+        u.pattern = "^[a-zA-Z0-9_]+$";
+        if (u.validity.patternMismatch) {
+
+            u.setCustomValidity("Username can only contain letters, numbers, and underscores.");
+            usernameErrorInput.textContent = u.validationMessage;
+
+        } else {
+            u.setCustomValidity("");
+            usernameErrorInput.textContent = "";
+        }
+    }
 }
+
+function validateEmailInput(e) {
+  
+
+    if (e.validity.typeMismatch) {
+                e.setCustomValidity("Please enter a valid email address.");
+                emailErrorInput.textContent = e.validationMessage; 
+        } else {
+           
+            e.setCustomValidity("");
+            emailErrorInput.textContent = "";
+        }
+  
+};
+
+
+function validatePasswordInput(p) {
+
+    p.minLength = 8;
+
+    if (p.validity.tooShort) {
+
+        p.setCustomValidity(`The password must be at least ${p.minLength} characters.`);
+        passwordErrorInput.textContent = p.validationMessage;
+
+    } else if (p.validity.patternMismatch) {
+        p.setCustomValidity("Password must include an uppercase letter, a lowercase letter, and a number.");
+        passwordErrorInput.textContent = p.validationMessage;
+
+    } else {
+        p.setCustomValidity("");
+        passwordErrorInput.textContent = "";
+    }
+}
+    
+function validateConfirmPasswordInput(p) {
+   
+    p.minLength = 8;
+
+    if (p.validity.tooShort) {
+
+        p.setCustomValidity(`The Confirm Password must be at least ${p.minLength} characters.`);
+        confirmPasswordErrorInput.textContent = p.validationMessage;
+
+    } else if (p.validity.patternMismatch) {
+
+        p.setCustomValidity("Confirm Password must include an uppercase letter, a lowercase letter, and a number.");
+        confirmPasswordErrorInput.textContent =p.validationMessage;
+
+    } else if (p.value !== passwordInput.value) {
+
+        p.setCustomValidity("The passwords don't match.");
+
+        confirmPasswordErrorInput.textContent = p.validationMessage;
+
+    } else {
+        p.setCustomValidity("");
+        confirmPasswordErrorInput.textContent = "";
+    }
+};
+
+// ************************
+// addEventListener
+// ************************
 
 registrationFormInput.addEventListener('focusout', function (event) {
 
-      // element that triggered the event
+     // element that triggered the event
     const input = event.target;
-    console.log('event.target: ======>' + input);
+    // console.log('event.target: ===>' + input);
 
     //    valor del input
-    console.log('event.target.value: ======>' + input.value);
+    // console.log('event.target.value: ===>' + input.value);
 
-    // 1. validate required
+    // validate required
     input.required = true;
-    validateInput(input, "required");
-
-    // 2. Validate username
-    if (input.id === "username") {
-        validateInput(input, "minlengthUser");
-    }
-
-    // 3. Validate email type
-    if (input.id === "email"){
-       
-        validateInput(input,"email");
-    }
-    
+        
 });
 
 usernameInput.addEventListener("input", function (event) {
-  
-    // element that triggered the event
-    const u = event.target;  
-     console.log('u.value.length ----->' + u.value.length);
+    validateUsernameInput(event.target);
 
-    if (u.value.trim() === "" || u.value.length === 0) {
-            console.log('trim() ----->' + u.value.length);
-            u.setCustomValidity("This field is required.===>");
-            usernameErrorInput.textContent = u.validationMessage;
-        } else {
-           
-            u.setCustomValidity("");
-        }
-
-    if (u.value.length > 0) {
-
-    u.pattern = "^[a-zA-Z0-9_]+$";
-    validateInput(u,"pattern");
-     
-    }
- 
 });
 
+emailInput.addEventListener("input", function (event) {
+    validateEmailInput(event.target);
+        
+});
+
+
 passwordInput.addEventListener("input", function (event) {
-    const p = event.target;
-    //validate minlength the password 
+     validatePasswordInput(event.target);
 
-    validateInput(p, "password");
+});
 
-    // 
-
-    if (p.validity.patternMismatch){
-      p.setCustomValidity('Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, and a number!');
-    } else{
-        p.setCustomValidity('');
-    }
-    passwordErrorInput.textContent = p.validationMessage;
-}
-)
 
 confirmPasswordInput.addEventListener("input", function (event) {
-    const p = event.target;
-    //validate minLength the password confirmation
-    validateInput(p, "confirmPassword");
+     validateConfirmPasswordInput(event.target);
 
-   if (p.validity.patternMismatch){
-      p.setCustomValidity('Confirm Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, and a number!');
-    } else if (p.value !== passwordInput.value){
-        p.setCustomValidity("The passwords don't match");
-          confirmPasswordErrorInput.textContent = p.validationMessage;
-
-      } 
-    else{
-        p.setCustomValidity('');
-    }
-    confirmPasswordErrorInput.textContent = p.validationMessage;
-
-}
-)
+});
 
 
 // ************************
 // submit registration 
 // ************************
 registrationFormInput.addEventListener("submit", function (event) {
-
+//   Does not execute the default Submit action  
     event.preventDefault();
-    addRegistration();
+   
+    // Validate all inputs
+    validateUsernameInput(usernameInput);
+    validateEmailInput(emailInput);
+    validatePasswordInput(passwordInput);
+    validateConfirmPasswordInput(confirmPasswordInput);
+     
+    // Check if the form is valid
+    if (registrationFormInput.checkValidity()) {
+        alert("Registration successful!");
+        addRegistration();
 
+    } else {
+
+        const firstInvalid =
+            registrationFormInput.querySelector(":invalid");
+
+        if (firstInvalid) {
+            firstInvalid.focus();
+        }
+    }
 });
