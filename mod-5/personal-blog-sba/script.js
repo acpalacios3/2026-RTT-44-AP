@@ -1,4 +1,4 @@
-let postList = [];
+
 
 let postForm = document.getElementById("postForm");
 let postTitleInput = document.getElementById("postTitle");
@@ -6,6 +6,9 @@ let postContentInput = document.getElementById("postContent");
 let titleError = document.getElementById("titleError");
 let contentError = document.getElementById("contentError");
 let postListElement = document.getElementById("postList");
+
+// let postList = [];
+let postList = JSON.parse(localStorage.getItem("postList")) || [];
 
 function validatePostForm() {
     let valid = true;
@@ -32,10 +35,12 @@ function addBlogPost() {
 
     let title = postTitleInput.value.trim();
     let content = postContentInput.value.trim();
+    // let datePost = new Date();
 
     // Create a new post object
     let newPost = {
-        id: postList.length + 1,
+        // id: postList.length + 1,
+        id: Date.now(),
         title: title,
         content: content,
         timestamp: new Date().toLocaleString()
@@ -45,6 +50,9 @@ function addBlogPost() {
     // Add post to the array
     postList.push(newPost);
     console.log(postList);
+
+    // Add post in localStore
+    localStorage.setItem("postList", JSON.stringify(postList));
 
     // Display posts
     displayPosts();
@@ -77,17 +85,51 @@ function displayPosts() {
         dateElement.className = "post-date";
         dateElement.textContent = "Created: " + post.timestamp;
 
+        // Create Delete Button
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.dataset.id = post.id;
 
-        // Add elements to the card
+
+        // addEventListener click
+    deleteButton.addEventListener("click", function () {
+
+    let id = Number(deleteButton.dataset.id);
+
+    postList = postList.filter(function (post) {
+        // return post.id !== id;
+        return Number(post.id) !== id;
+    });
+
+    localStorage.setItem("postList", JSON.stringify(postList));
+
+    displayPosts();
+
+    });
+
+    // Add elements 
         postCard.appendChild(titleElement);
         postCard.appendChild(contentElement);
         postCard.appendChild(dateElement);
 
-        // Add card to the page
-        postListElement.appendChild(postCard);
+    // Add delete buttton
+           postCard.appendChild(deleteButton);
 
-    });
+    // Add card to the page
+        postListElement.appendChild(postCard);
+});
+
 }
+
+
+// clears all tasks from localStorage and taskList
+
+clearButton.addEventListener("click", function () {
+    localStorage.removeItem("postList");
+    postList = [];
+    displayPosts();
+});
+
 
 // ==============
 // Submit form
