@@ -22,7 +22,7 @@ class PhysicalProduct extends Product {
 // create the object using the class (Product) ( creating an instance of the Product class)
 const PhysicalProduct1 = new PhysicalProduct("30", "Laptop", 1200, 5); // instantiation
 const PhysicalProduct2 = new PhysicalProduct("40", "TV", 500, 20);
-console.log(PhysicalProduct1.displayDetails(), PhysicalProduct1.getPriceWithTax(), PhysicalProduct1.formattedWeightKg);
-console.log(PhysicalProduct2.displayDetails(), PhysicalProduct2.getPriceWithTax(), PhysicalProduct2.formattedWeightKg);
+console.log("Physical Product 1:", PhysicalProduct1.displayDetails(), PhysicalProduct1.getPriceWithTax(), PhysicalProduct1.formattedWeightKg);
+console.log("Physical Product 2:", PhysicalProduct2.displayDetails(), PhysicalProduct2.getPriceWithTax(), PhysicalProduct2.formattedWeightKg);
 export default PhysicalProduct;
 //# sourceMappingURL=PhysicalProduct.js.map

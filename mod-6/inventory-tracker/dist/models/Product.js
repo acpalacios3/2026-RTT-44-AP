@@ -23,7 +23,7 @@ class Product {
 // create the object using the class (Product) ( creating an instance of the Product class)
 const product1 = new Product("10", "Iphone", 1000); // instantiation
 const product2 = new Product("20", "tablet", 450);
-console.log(product1.displayDetails());
-console.log(product2.displayDetails());
+console.log("Product 1:", product1.displayDetails());
+console.log("Product 2:", product2.displayDetails());
 export default Product;
 //# sourceMappingURL=Product.js.map
