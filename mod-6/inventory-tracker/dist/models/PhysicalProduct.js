@@ -11,18 +11,20 @@ class PhysicalProduct extends Product {
     }
     // "override" use for overrides the parent "Product" function
     getPriceWithTax() {
-        let tax = this.price * 0.10;
-        return this.price + tax;
+        const taxRate = 0.10;
+        console.log("PhysicalProducts-getPriceWithTax - price with tax:", (taxRate + 1));
+        return this.price * (taxRate + 1);
     }
     //get allows you to use the function as a property and not as a function
-    get formattedWeightKg() {
+    get formattedWeight() {
         return `${this.weight} kg`;
     }
 }
 // create the object using the class (Product) ( creating an instance of the Product class)
 const PhysicalProduct1 = new PhysicalProduct("30", "Laptop", 1200, 5); // instantiation
 const PhysicalProduct2 = new PhysicalProduct("40", "TV", 500, 20);
-console.log("Physical Product 1:", PhysicalProduct1.displayDetails(), PhysicalProduct1.getPriceWithTax(), PhysicalProduct1.formattedWeightKg);
-console.log("Physical Product 2:", PhysicalProduct2.displayDetails(), PhysicalProduct2.getPriceWithTax(), PhysicalProduct2.formattedWeightKg);
+// test
+// console.log("Physical Product 1:",PhysicalProduct1.displayDetails(),PhysicalProduct1.getPriceWithTax(), PhysicalProduct1.formattedWeight);
+// console.log("Physical Product 2:",PhysicalProduct2.displayDetails(),PhysicalProduct2.getPriceWithTax(), PhysicalProduct2.formattedWeight);
 export default PhysicalProduct;
 //# sourceMappingURL=PhysicalProduct.js.map

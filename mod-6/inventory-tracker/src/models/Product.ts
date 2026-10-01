@@ -24,8 +24,10 @@ class Product {
 
     getPriceWithTax(): number{
         
-       let tax = this.price * (.08 + 1);
-       return  this.price + tax;
+       const taxRate = 0.08;
+       console.log("Product-getPriceWithTax: ","taxRate",(taxRate + 1));
+       return  this.price * (taxRate + 1);
+
     }
 
 }
@@ -34,8 +36,9 @@ class Product {
 const product1 = new Product("10","Iphone", 1000); // instantiation
 const product2 = new Product("20","tablet", 450 );
 
-console.log("Product 1:",product1.displayDetails());
-console.log("Product 2:",product2.displayDetails());
+// test
+// console.log("Product 1:",product1.displayDetails());
+// console.log("Product 2:",product2.displayDetails());
 
  export default Product;
 
