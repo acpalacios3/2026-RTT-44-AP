@@ -22,34 +22,33 @@
 
             <form id="postForm" novalidate>
 
-                        <div class="d-flex align-items-center mb-1">
+                        <div class="form-group d-flex align-items-center mb-1">
                             <label for="postTitle" class="form-label">Post Title:</label>
                             <input id="postTitle" type="text" class="form-control w-50" placeholder="Enter post Title"
                             required>
-                             <span id="titleError" class="error-message"></span>
+                            
                         </div>
+                         <span id="titleError" class="error-message d-block  "></span>
 
-                        <div class="d-flex align-items-center mb-1">
+                        <div class="form-group d-flex align-items-center mb-1">
                             <label for="postContent"  class="form-label">Post Content:</label>
                             <textarea id="postContent" class="form-control" rows="5" placeholder=" Post Content" required>
                              </textarea>
-                             <span id="contentError" class="error-message"></span>
+                             
                         </div>
+                        <span id="contentError" class="error-message d-block  "></span>
                   
-                     <button id="submit" type="submit" id="submitButton"  class="btn btn-primary"> 
+                     <button id="submitButton" type="submit" class="btn btn-primary"> 
                     Add Post
                     </button>
 
-                    <button id="clearButton" class="btn btn-danger mt-3">
-                        Clear Tasks
-                    </button>
-                                     
+                                                       
             </form>
         </div>
 
         <div>
 
-            <h2 class="h4 mb-3">Blog Posts</h2>
+            <h2 class="h4 mb-3">Blog Posts: </h2>
             <div id="postList"></div>
 
 

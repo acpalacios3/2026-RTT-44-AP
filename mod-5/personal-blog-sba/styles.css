@@ -24,3 +24,43 @@ input
     margin-bottom: 50px;
 } 
 
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+ 
+
+ 
+h1 {
+  text-align: center;
+  color: #333;
+}
+ 
+ 
+.form-group input:invalid {
+  border-color: #e74c3c; /* Light red for invalid built-in states */
+}
+/* You can add a .valid class if you want to style valid inputs too */
+ 
+ /* .form-group .error-message {
+  font-size: 0.9em;
+  margin-top: 5px;
+  min-height: 1em; 
+} */
+ 
+
+.error-message {
+    display: block;
+    color: #e74c3c;
+    font-size: 0.9em;
+    margin-top: 5px;
+    margin-left: 108px;
+    min-height: 1em;
+}
