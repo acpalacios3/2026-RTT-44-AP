@@ -32,9 +32,8 @@ class DigitalProduct extends Product {
  export default DigitalProduct;
  
 // create the object using the class (Product) ( creating an instance of the Product class)
-const DigitalProduct1 = new DigitalProduct("50","E-books", 40, 150); // instantiation
-const DigitalProduct2 = new DigitalProduct("60","Online courses", 100,500 );
-
+// const DigitalProduct1 = new DigitalProduct("50","E-books", 40, 150); // instantiation
+// const DigitalProduct2 = new DigitalProduct("60","Online courses", 100,500 );
 
 // console.log("Digital Product 1:",DigitalProduct1.displayDetails(),"no tax",DigitalProduct1.getPriceWithTax(), DigitalProduct1.formattedWeight);
 // console.log("Digital Product 2:",DigitalProduct2.displayDetails(),"no tax",DigitalProduct2.getPriceWithTax(), DigitalProduct2.formattedWeight);
