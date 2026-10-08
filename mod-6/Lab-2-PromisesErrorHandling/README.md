@@ -1,0 +1,4 @@
+***Considerations in Testing:***
+1. To verify that the "DataError" error in fetchProductReviews is replicated, we must make the if condition false, for example, we comment out the if (Math.random() < 0.8) { and change it to: if (false) {   
+
+2. To verify that the "NetworkError" error in fetchSalesReport is replicated, we must make the if condition true in fetchProductReviews since this promise was executed before and if it is false it will go to .catch() captures the first error that occurs and will no longer go through fetchSalesReport. Additionally, before testing in fetchSalesReport, the condition should be changed to false for testing purposes only.
