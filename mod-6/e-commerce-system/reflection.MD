@@ -1,0 +1,11 @@
+***Reflection TypeScript and Advanced JavaScript***
+
+In this project, I practiced using TypeScript and Object-Oriented Programming (OOP) principles, including classes, constructors, class instances, and inheritance, to develop an application that retrieves and processes product information from the DummyJSON Products API.
+
+I created a Product class to organize product information, including the name, price, category, and discount percentage. I implemented methods such as displayDetails() and getPriceWithDiscount() to display product details and calculate prices. I also developed separate utility modules, discountCalculator.ts and taxCalculator.ts, to calculate discounts and taxes. This modular approach helped me organize the code and separate utility functions from the main application logic. I applied TypeScript features such as classes, properties, functions, and type annotations to make the code more structured and easier to maintain.
+
+One of the main challenges was understanding how to work with data received from an external API and manage asynchronous operations. I addressed this challenge by using async/await and Promises to retrieve product information. I also used try/catch blocks to handle errors that could occur during API requests. Another challenge was implementing the correct tax calculations because the API does not provide a tax percentage for each product. To solve this problem, I applied the required default tax rate of 4.75% and the reduced rate of 3% for products in the groceries category.
+
+I also implemented custom error classes that extend the built-in Error class, including NetworkError, DataError, and TaxCalculationError. I organized the error-handling logic in a separate module. This approach helped me understand how to identify and handle different types of errors and incorporate custom error handling into functions that require it.
+
+Overall, this project helped me strengthen my knowledge of TypeScript, OOP, modular programming, API integration, and asynchronous JavaScript. It also helped me understand the importance of writing organized, reusable, and maintainable cod

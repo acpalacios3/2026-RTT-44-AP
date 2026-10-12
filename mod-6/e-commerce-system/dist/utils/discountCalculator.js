@@ -1,3 +1,5 @@
+// Part 3: Implementation
+//2. Implement Utilities:
 // Discount Calculator Module (discountCalculator.ts):
 // Create a calculateDiscount() function to handle discount calculations for products.
 // This function should return the dollar amount that a product is discounted by. 
@@ -5,6 +7,6 @@
 function calculateDiscount(price, discountPercentage) {
     return Number(((price * discountPercentage) / 100).toFixed(2));
 }
-console.log("discount:", calculateDiscount(100, 10));
-export {};
+console.log("discount: $", calculateDiscount(100, 10));
+export default calculateDiscount;
 //# sourceMappingURL=discountCalculator.js.map

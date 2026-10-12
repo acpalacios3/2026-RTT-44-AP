@@ -11,3 +11,5 @@ function calculateDiscount(price:number, discountPercentage: number):number
 }
 
 console.log("discount: $",calculateDiscount(100,10));
+
+ export default calculateDiscount;

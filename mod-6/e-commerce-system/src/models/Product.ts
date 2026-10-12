@@ -8,6 +8,8 @@
 
 
 import fetchDataAPI from "../services/apiServices.js";
+import calculateTax from "../utils/taxCalculator.js";
+
 
 
 class Product {
@@ -18,9 +20,10 @@ class Product {
     title: string;
     price: number;
     discountPercentage: number;
+    category: string;
     
     // built-in method of our class that helps us create the object
-    constructor(id: number, sku: string, title: string, price: number, discountPercentage: number ) {
+    constructor(id: number, sku: string, title: string, price: number, discountPercentage: number, category: string ) {
 
         // assigning values to our properties
         this.id = id
@@ -28,12 +31,15 @@ class Product {
         this.title = title;
         this.price = price;
         this.discountPercentage = discountPercentage;
+        this.category = category;
        
     }
 
     // any object we create from this class will include this method (displayDetails)
     displayDetails(): string {
-        return `id: ${this.id},SKU: ${this.sku}, Title: ${this.title}, Price: $${this.price}, Discount: ${this.discountPercentage}`;
+        return `id: ${this.id},SKU: ${this.sku}, Title: ${this.title},
+               Price: $${this.price}, Discount: ${this.discountPercentage},
+               Category: ${this.category} `;
     }
 
     getPriceWithDiscount(): number{
@@ -49,13 +55,22 @@ class Product {
 const data = await fetchDataAPI();
 
 // create the object using the API data
-const product1 = new Product(data.id, data.sku, data.title, data.price, data.discountPercentage);
+const product1 = new Product(data.id, data.sku, data.title, data.price, data.discountPercentage, data.category);
 
 //console.log(product1);
 
 // test
- console.log("Product 1:",product1.displayDetails());
- console.log("Price with discount ====>:",product1.getPriceWithDiscount() );
+//  console.log("Product 1:",product1.displayDetails());
+//  console.log("Price with discount ====>:",product1.getPriceWithDiscount() );
+
+
+ // call function calculateTax
+ const valueTaxCategory = calculateTax(data.price,data.category);
+//  console.log("price:$",data.price,"category:", data.category);
+//  console.log("Value Tax by category: $",valueTaxCategory);
+
+
+ export default Product;
 
 
 
