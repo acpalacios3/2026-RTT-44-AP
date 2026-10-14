@@ -4,8 +4,6 @@ import Product from "./models/Product.js";
 import { NetworkError, TaxCalculationError } from "./utils/errorHandler.js";
 import { DataError } from "./utils/errorHandler.js";
 
-
-
 async function main() {
 
     try {
@@ -26,7 +24,7 @@ async function main() {
 
         console.log("Tax value beauty: $", taxvalue);
 
-    } catch(error) {
+    } catch (error) {
 
         if (error instanceof NetworkError) {
             console.error("Network error:", error.message);
@@ -34,10 +32,10 @@ async function main() {
         } else if (error instanceof DataError) {
             console.error("Data error:", error.message);
 
-        } else if (error instanceof TaxCalculationError){
+        } else if (error instanceof TaxCalculationError) {
             console.log("Tax calculation error:", error.message);
 
-        }else {
+        } else {
             console.error("Unknown error:", error);
         }
 

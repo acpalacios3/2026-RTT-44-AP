@@ -14,34 +14,29 @@ import { DataError, NetworkError } from "../utils/errorHandler.js";
 
 //GET
 async function fetchDataAPI() {
-  
 
   // 1. fetch API
- 
-    const response = await fetch("https://dummyjson.com/products/1");
- 
+
+  const response = await fetch("https://dummyjson.com/products/1");
 
   // console.log(response);
   // 2. HTTP error
- if (!response.ok) {
+  if (!response.ok) {
     throw new NetworkError(`API request failed: ${response.status}`);
   }
 
-
   // 3. Format JSON
   try {
-  const data = await response.json();
-  console.log("Fetched data products with format JSON:========>", data);
-   return data;
-    
+    const data = await response.json();
+    console.log("Fetched data products with format JSON:========>", data);
+    return data;
+
   } catch {
     throw new DataError("response is not valid JSON");
   }
 
-   
 }
 
- 
-  fetchDataAPI();
+fetchDataAPI();
 
- export default fetchDataAPI;
+export default fetchDataAPI;

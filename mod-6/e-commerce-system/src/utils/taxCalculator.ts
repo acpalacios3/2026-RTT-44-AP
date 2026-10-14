@@ -8,7 +8,7 @@
 
 import { TaxCalculationError } from "./errorHandler.js";
 
-function calculateTax(price: number, category : string):number {
+function calculateTax(price: number, category: string): number {
 
 
     if (price < 0) {
@@ -20,10 +20,10 @@ function calculateTax(price: number, category : string):number {
     if (category === "groceries") {
         taxPercentage = 3;
     } else {
-        taxPercentage = 4,75;
+        taxPercentage = 4, 75;
     }
 
-return Number(((price * taxPercentage)/100).toFixed(2));
+    return Number(((price * taxPercentage) / 100).toFixed(2));
 
 }
 // test:
